@@ -27,10 +27,12 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify({ ok: "ok" }));
       break;
     default:
-      const files = readdirSync("./assets");
+      const files = readdirSync("./assets", {
+        recursive: true,
+        encoding: "utf-8",
+      });
       const file = files.find((f) => {
         const fileName = f.split(".").slice(0, -1).join(".");
-        console.log(fileName, url.pathname.slice(1));
         return fileName === url.pathname.slice(1);
       });
       readFile(`./assets/${file}`, (err, data) => {
