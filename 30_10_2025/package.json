@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "nodemon",
@@ -11,7 +12,9 @@
     "lint:fix": "eslint . --fix "
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "mysql2": "^3.15.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
