@@ -15,5 +15,21 @@ export default async function getApiRouter() {
     }
   })
 
+  router.get('/api/contact-messages/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+      const [results] = await db.query('SELECT * FROM messages WHERE id = ?', [
+        id
+      ])
+      if (Array.isArray(results) && results.length > 0) {
+        res.json(results[0])
+      } else {
+        writeError(res, 404, 'Message not found')
+      }
+    } catch (err) {
+      writeError(res, 500, err)
+    }
+  })
+
   return router
 }
