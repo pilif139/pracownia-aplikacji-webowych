@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "prisma"
 }
 
@@ -14,40 +14,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post{
-  id       Int      @id @default(autoincrement())
+model Post {
+  id        Int      @id @default(autoincrement())
   title     String
   content   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   categories Category[]
-  comments Comment[]
+  comments   Comment[]
 }
 
-model Category{
-  id Int @id @default(autoincrement())
-  name String @unique
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   posts Post[]
 }
 
-model User{
-  id      Int      @id @default(autoincrement())
-  email    String   @unique
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
   name     String?
   password String
 
   comments Comment[]
 }
 
-model Comment{
-  id Int @id @default(autoincrement())
-  content String
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  authorId Int
-  postId Int
+  authorId  Int
+  postId    Int
 
-  post Post @relation(fields: [postId], references: [id])
+  post   Post @relation(fields: [postId], references: [id])
   author User @relation(fields: [authorId], references: [id])
 }
