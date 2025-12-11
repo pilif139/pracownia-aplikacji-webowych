@@ -6,25 +6,44 @@ import commentController from './controller/comment.controller'
 import MongoService from './mongo'
 import { logsMiddleware } from './middleware/logs'
 import { errorMiddleware } from './middleware/error'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app: Express = express()
 
-MongoService.connect();
-
 app.use(express.json())
-app.use(logsMiddleware);
-app.use(errorMiddleware);
+app.use(logsMiddleware)
 app.use('/post', postController)
 app.use('/user', userController)
 app.use('/category', categoryController)
 app.use('/comment', commentController)
 
+app.use(errorMiddleware)
+
 async function run() {
-  app.listen(3000, () => {
-    console.log('App is running on http://localhost:3000')
-  })
+  try {
+    await MongoService.connect()
+
+    app.listen(3000, () => {
+      console.log('App is running on http://localhost:3000')
+    })
+  } catch (error) {
+    console.error('Failed to start application:', error)
+    process.exit(1)
+  }
 }
 
-run().finally(()=>{
-  MongoService.disconnect();
+run()
+
+process.on('SIGINT', async () => {
+  console.log('Shutting down gracefully...')
+  await MongoService.disconnect()
+  process.exit(0)
+})
+
+process.on('SIGTERM', async () => {
+  console.log('Shutting down gracefully...')
+  await MongoService.disconnect()
+  process.exit(0)
 })

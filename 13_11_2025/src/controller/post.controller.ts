@@ -5,18 +5,26 @@ import * as categoryRepository from '../repository/category.repository'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  const posts = await postRepository.getAllPosts()
-  res.json(posts)
+router.get('/', async (req, res, next) => {
+  try {
+    const posts = await postRepository.getAllPosts()
+    res.json(posts)
+  } catch (error) {
+    next(error)
+  }
 })
 
-router.get('/:id', async (req, res) => {
-  const id = Number(req.params.id)
-  const post = await postRepository.getPostById(id)
-  if (post) {
-    res.json(post)
-  } else {
-    res.status(404).json({ message: 'Post not found' })
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const post = await postRepository.getPostById(id)
+    if (post) {
+      res.json(post)
+    } else {
+      res.status(404).json({ message: 'Post not found' })
+    }
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -26,33 +34,36 @@ type NewPostRequest = {
   categoriesIds: number[]
 }
 
-router.post('/', async (req, res) => {
-  const { title, content, categoriesIds } = req.body as NewPostRequest
+router.post('/', async (req, res, next) => {
+  try {
+    const { title, content, categoriesIds } = req.body as NewPostRequest
 
-  const categories = await Promise.all(
-    categoriesIds.map((id) => categoryRepository.getCategoryById(id))
-  )
+    const categories = await Promise.all(
+      categoriesIds.map((id) => categoryRepository.getCategoryById(id))
+    )
 
-  if (categories.some((category) => !category)) {
-    return res.status(400).json({ message: 'Invalid category ID(s)' })
-  }
-
-  const newPost = await postRepository.createPost({
-    title,
-    content,
-    categories: {
-      connect: categories.map((category) => ({ id: category!.id }))
+    if (categories.some((category) => !category)) {
+      return res.status(400).json({ message: 'Invalid category ID(s)' })
     }
-  })
-  res.status(201).json(newPost)
+
+    const newPost = await postRepository.createPost({
+      title,
+      content,
+      categories: {
+        connect: categories.map((category) => ({ id: category!.id }))
+      }
+    })
+    res.status(201).json(newPost)
+  } catch (error) {
+    next(error)
+  }
 })
 
-router.put('/:id', async (req, res) => {
-  const id = Number(req.params.id)
-  const { title, content, categoriesIds } = req.body as NewPostRequest
-
+router.put('/:id', async (req, res, next) => {
   try {
-    // Validate categories if provided
+    const id = Number(req.params.id)
+    const { title, content, categoriesIds } = req.body as NewPostRequest
+
     if (categoriesIds && categoriesIds.length > 0) {
       const categories = await Promise.all(
         categoriesIds.map((id) => categoryRepository.getCategoryById(id))
@@ -74,16 +85,15 @@ router.put('/:id', async (req, res) => {
     })
     res.json(updatedPost)
   } catch (error) {
-    res.status(500).json({ message: 'Error updating post', error: error })
+    next(error)
   }
 })
 
-router.patch('/:id', async (req, res) => {
-  const id = Number(req.params.id)
-  const { title, content, categoriesIds } = req.body
-
+router.patch('/:id', async (req, res, next) => {
   try {
-    // Validate categories if provided
+    const id = Number(req.params.id)
+    const { title, content, categoriesIds } = req.body
+
     if (categoriesIds && categoriesIds.length > 0) {
       const categories = await Promise.all(
         categoriesIds.map((id: number) =>
@@ -108,18 +118,22 @@ router.patch('/:id', async (req, res) => {
     const updatedPost = await postRepository.patchPost(id, updateData)
     res.json(updatedPost)
   } catch (error) {
-    res.status(500).json({ message: 'Error updating post', error: error })
+    next(error)
   }
 })
 
-router.delete('/:id', async (req, res) => {
-  const id = Number(req.params.id)
-  const isValid = await postRepository.getPostById(id)
-  if (!isValid) {
-    return res.status(500).json({ message: 'Error deleting post' })
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = Number(req.params.id)
+    const isValid = await postRepository.getPostById(id)
+    if (!isValid) {
+      return res.status(500).json({ message: 'Error deleting post' })
+    }
+    await postRepository.deletePost(id)
+    res.status(204).send()
+  } catch (error) {
+    next(error)
   }
-  await postRepository.deletePost(id)
-  res.status(204).send()
 })
 
 export default router

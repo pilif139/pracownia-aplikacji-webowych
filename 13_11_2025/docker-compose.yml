@@ -12,9 +12,9 @@ services:
   mongo:
     image: mongo:latest
     environment:
-      MONGO_USER: root
-      MONGO_PASSWORD: 123
-      MONGO_DATABASE: database
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123
+      MONGO_INITDB_DATABASE: database
     volumes:
       - mongo_data:/data/db
     ports:
