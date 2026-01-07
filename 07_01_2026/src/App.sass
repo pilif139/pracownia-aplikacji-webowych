@@ -1,0 +1,60 @@
+h1
+  font-size: 2rem
+  margin-block: 0.75rem
+
+a
+  color: green
+  text-decoration: none
+  transition: all 0.5s
+
+  &:hover
+    text-decoration: underline
+
+  &:active
+    color: darken(green, 10%)
+
+  &:visited
+    color: darken(green, 5%)
+
+.content
+  margin-inline: 5rem
+
+.home
+  display: flex
+  flex-direction: column
+  align-items: start
+
+  article
+    margin-block: 1rem
+    width: 100%
+
+    h2
+      margin-bottom: 0.5rem
+
+    ul
+      list-style: none
+      padding: 0
+
+      li
+        margin-bottom: 0.25rem
+
+        p
+          margin-inline: 0.5rem
+
+.categories
+  ul
+    list-style: square
+    padding: 0
+
+    li
+      margin-inline: 0.5rem
+      font-size: 1.25rem
+
+.post
+  article
+    margin-block: 1rem
+    width: 50%
+
+  p
+    margin-block: 0.5rem
+    line-height: 1.6
