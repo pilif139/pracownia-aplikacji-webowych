@@ -1,86 +1,24 @@
-import { useEffect, useEffectEvent, useState } from "react";
 import { useParams } from "react-router";
-import type { Post } from "./Home";
-
-type User = {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-};
-
-async function getPostById(id: string) {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`,
-  );
-  const data = await response.json();
-  return data;
-}
-
-async function getUserById(id: number) {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/users/${id}`,
-  );
-  const data = (await response.json()) as User;
-  return data;
-}
+import { useGetUser } from "../hooks/useGetUser";
+import { useGetPost } from "../hooks/useGetPost";
 
 export default function Post() {
-  const [post, setPost] = useState<Post | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const id = useParams().id as string;
 
-  const id = useParams().id;
+  const { data: post, ...postQuery } = useGetPost(id);
+  const { data: user, ...userQuery } = useGetUser(post?.userId as string);
 
-  const onGetUser = useEffectEvent(async () => {
-    try {
-      if (!post) return;
-      const user = await getUserById(post.userId);
-      setUser(user);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-  const onGetPost = useEffectEvent(async () => {
-    try {
-      if (!id) return;
-      const post = await getPostById(id);
-      setPost(post);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-  useEffect(() => {
-    onGetPost();
-  }, [id]);
-
-  useEffect(() => {
-    if (!post) return;
-    onGetUser();
-  }, [post]);
-
-  if (!post)
+  if (postQuery.isLoading || userQuery.isLoading)
     return (
       <div className="post">
         <h1>Loading...</h1>
+      </div>
+    );
+
+  if (postQuery.isError || userQuery.isError)
+    return (
+      <div className="post">
+        <h1>Error</h1>
       </div>
     );
 
