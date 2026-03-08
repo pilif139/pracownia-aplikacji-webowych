@@ -1,0 +1,89 @@
+h1 {
+  font-size: 2rem;
+  margin-block: 0.75rem;
+}
+
+a {
+  color: green;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  color: #004d00;
+}
+a:visited {
+  color: rgb(0, 102.5, 0);
+}
+
+.content {
+  margin-inline: 5rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.home main {
+  margin-block: 1rem;
+  width: 50%;
+}
+.home main h2 {
+  margin-bottom: 0.5rem;
+}
+.home main ul {
+  list-style: disc;
+  padding: 0;
+}
+.home main ul li {
+  margin-bottom: 0.25rem;
+}
+.home main ul li p {
+  margin-inline: 0.5rem;
+}
+
+.categories ul {
+  list-style: square;
+  padding: 0;
+}
+.categories ul li {
+  margin-inline: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.post article {
+  margin-block: 1rem;
+  width: 50%;
+}
+.post p {
+  margin-block: 0.5rem;
+  line-height: 1.6;
+} /*# sourceMappingURL=App.css.map */
+
+.user {
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+  }
+}
+
+.comment_form {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  gap: 1em;
+
+  button {
+    width: fit-content;
+    padding: 0.5em 1em;
+    transition: 0.5s;
+    background-color: gray;
+  }
+  button:hover {
+    background-color: #d0d0d0;
+  }
+}
