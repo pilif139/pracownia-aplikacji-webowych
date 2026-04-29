@@ -1,0 +1,88 @@
+[
+    {
+        "Jan Kowalski (21)": [
+            {
+                "Tytuł": "Pan Tadeusz",
+                "Dni": 10,
+                "Status": "OK",
+                "Opłata": 0
+            },
+            {
+                "Tytuł": "Hobbit",
+                "Dni": 20,
+                "Status": "WARNING",
+                "Opłata": 6
+            },
+            {
+                "Tytuł": "Wladca Pierscieni",
+                "Dni": 35,
+                "Status": "OVERDUE",
+                "Opłata": 21
+            }
+        ]
+    },
+    {
+        "Anna Nowak (22)": [
+            {
+                "Tytuł": "Quo Vadis",
+                "Dni": 14,
+                "Status": "OK",
+                "Opłata": 0
+            },
+            {
+                "Tytuł": "Rok 1984",
+                "Dni": 18,
+                "Status": "WARNING",
+                "Opłata": 4
+            }
+        ]
+    },
+    {
+        "Piotr Zielinski (23)": [
+            {
+                "Tytuł": "Lalka",
+                "Dni": 7,
+                "Status": "OK",
+                "Opłata": 0
+            },
+            {
+                "Tytuł": "Hobbit",
+                "Dni": 40,
+                "Status": "OVERDUE",
+                "Opłata": 26
+            }
+        ]
+    },
+    {
+        "Maria Wisniewska (20)": [
+            {
+                "Tytuł": "Wladca Pierscieni",
+                "Dni": 12,
+                "Status": "OK",
+                "Opłata": 0
+            },
+            {
+                "Tytuł": "Pan Tadeusz",
+                "Dni": 16,
+                "Status": "WARNING",
+                "Opłata": 2
+            }
+        ]
+    },
+    {
+        "Tomasz Lewandowski (21)": [
+            {
+                "Tytuł": "Quo Vadis",
+                "Dni": 25,
+                "Status": "WARNING",
+                "Opłata": 11
+            },
+            {
+                "Tytuł": "Rok 1984",
+                "Dni": 5,
+                "Status": "OK",
+                "Opłata": 0
+            }
+        ]
+    }
+]

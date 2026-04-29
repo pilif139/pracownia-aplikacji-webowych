@@ -1,0 +1,94 @@
+[
+    {
+        "Pan Tadeusz": {
+            "Autor": "Adam Mickiewicz",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Jan Kowalski (21)",
+                    "Dni": 10
+                },
+                {
+                    "Czytelnik": "Maria Wisniewska (20)",
+                    "Dni": 16
+                }
+            ],
+            "Średnia": 13.0
+        }
+    },
+    {
+        "Quo Vadis": {
+            "Autor": "Henryk Sienkiewicz",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Anna Nowak (22)",
+                    "Dni": 14
+                },
+                {
+                    "Czytelnik": "Tomasz Lewandowski (21)",
+                    "Dni": 25
+                }
+            ],
+            "Średnia": 19.5
+        }
+    },
+    {
+        "Hobbit": {
+            "Autor": "J.R.R. Tolkien",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Jan Kowalski (21)",
+                    "Dni": 20
+                },
+                {
+                    "Czytelnik": "Piotr Zielinski (23)",
+                    "Dni": 40
+                }
+            ],
+            "Średnia": 30.0
+        }
+    },
+    {
+        "Rok 1984": {
+            "Autor": "George Orwell",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Anna Nowak (22)",
+                    "Dni": 18
+                },
+                {
+                    "Czytelnik": "Tomasz Lewandowski (21)",
+                    "Dni": 5
+                }
+            ],
+            "Średnia": 11.5
+        }
+    },
+    {
+        "Lalka": {
+            "Autor": "Bolesław Prus",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Piotr Zielinski (23)",
+                    "Dni": 7
+                }
+            ],
+            "Średnia": 7.0
+        }
+    },
+    {
+        "Wladca Pierscieni": {
+            "Autor": "J.R.R. Tolkien",
+            "Wypożyczenia": [
+                {
+                    "Czytelnik": "Jan Kowalski (21)",
+                    "Dni": 35
+                },
+                {
+                    "Czytelnik": "Maria Wisniewska (20)",
+                    "Dni": 12
+                }
+            ],
+            "Średnia": 23.5
+        }
+    }
+]
